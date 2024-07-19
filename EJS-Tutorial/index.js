@@ -9,25 +9,17 @@ const port = 3000;
 const userPassword = '12345';
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set('views');
+app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
-  //   console.log(__dirname);
+  res.render('index');
 });
 
 app.post('/submit', (req, res) => {
   console.log(req.body);
   let userName = req.body.fullName;
-  // console.log(userName);
-  res.sendFile(__dirname + '/public/success.html');
-
-  // if (req.body.passwd === '12345') {
-  //   res.send('Logged in Successfully');
-  // } else {
-  //   res.send('Incorrect Credentials');
-  // }
-  // res.send('Form details collected Successfully!');
-  //   console.log(__dirname);
+  res.render('success', { fName: userName });
 });
 
 app.listen(port, () => {
